@@ -5,9 +5,7 @@ import com.hebh.cloud.repository.UserRepository;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Hebh
@@ -31,5 +29,10 @@ public class UserController {
     public String serviceUrl() {
         InstanceInfo instance = discoveryClient.getNextServerFromEureka("MICROSERVICE-PROVIDER-USER", false);
         return instance.getHomePageUrl();
+    }
+
+    @PostMapping("/user")
+    public User postUser(@RequestBody User user){
+        return user;
     }
 }
